@@ -1,7 +1,5 @@
 package com.rd.http;
 
-import com.rd.http.UserTrackingService;
-
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
