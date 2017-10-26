@@ -133,12 +133,16 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <path>/CounterWebApp</path>
+                    <url>http://localhost:8080/manager/text</url>
+                    <server>TomcatServer</server>
+                    <path>/usertracking</path>
+                    <username>admin</username>
+                    <password>admin</password>
                 </configuration>
             </plugin>
         </plugins>
 
-        <finalName>UserTrackingResultadosDigitais</finalName>
+        <finalName>usertracking</finalName>
     </build>
 
 </project>
