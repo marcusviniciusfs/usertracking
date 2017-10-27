@@ -16,8 +16,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletContext;
-import java.io.InputStream;
+import java.io.File;
+import java.util.concurrent.ExecutionException;
 
 enum CommandLineOption {
 
@@ -94,15 +94,21 @@ public final class Main {
     private static void start() {
         final DatabaseService databaseService;
         try {
-            InputStream inputStream = (ServletContext.class.getResourceAsStream("WEB-INF/hibernate.properties"));
-            databaseService = new DatabaseService(UserTracking.class.getSimpleName(), inputStream);
+            databaseService = new DatabaseService(UserTracking.class.getSimpleName(), new File("hibernate.properties"));
         } catch (DatabaseException e) {
             LOGGER.trace("", e);
             LOGGER.error("", ExceptionUtils.getRootCause(e));
             return;
         }
 
-        final UserTracking userTracking = UserTrackingFactory.create(databaseService);
-        LOGGER.info(userTracking.getVersion());
+        try {
+            final UserTracking userTracking = UserTrackingFactory.create(databaseService);
+            userTracking.start().get();
+        } catch (ExecutionException | InterruptedException e) {
+            databaseService.close();
+            LOGGER.trace("", e);
+            LOGGER.error("", ExceptionUtils.getRootCause(e));
+            Thread.currentThread().interrupt();
+        }
     }
 }

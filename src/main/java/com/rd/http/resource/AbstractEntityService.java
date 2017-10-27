@@ -1,4 +1,4 @@
-package com.rd.http;
+package com.rd.http.resource;
 
 
 import com.rd.persistence.database.DatabaseService;

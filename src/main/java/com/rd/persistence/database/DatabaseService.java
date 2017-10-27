@@ -14,8 +14,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public final class DatabaseService {
@@ -26,11 +28,11 @@ public final class DatabaseService {
 
     private Integer defaultTransactionTimeout;
 
-    public DatabaseService(final String persistenceUnitName, final InputStream propertiesFile) throws DatabaseException {
+    public DatabaseService(final String persistenceUnitName, final File propertiesFile) throws DatabaseException {
 
         final OrderedProperties properties = new OrderedProperties();
-        try {
-            properties.load(propertiesFile);
+        try (final FileInputStream inputStream = new FileInputStream(propertiesFile)) {
+            properties.load(inputStream);
         } catch (IOException e) {
             throw new DatabaseException(e);
         }

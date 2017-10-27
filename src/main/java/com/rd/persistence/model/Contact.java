@@ -4,16 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@Entity
 @NamedQueries({
         @NamedQuery(
-                name = Contato.FIND_ALL,
-                query = "from Contato"
+                name = Contact.FIND_ALL,
+                query = "from Contact"
         )
 })
-public class Contato extends AbstractEntity {
+@Entity
+public class Contact extends AbstractEntity {
 
-    public static final String FIND_ALL = "Contato.findAll";
+    public static final String FIND_ALL = "Contact.findAll";
 
     private String email;
 
@@ -21,13 +21,13 @@ public class Contato extends AbstractEntity {
 
     private String datetime;
 
-    public Contato(final String theEmail, final String theUrl, final String theDateTime) {
+    public Contact(final String theEmail, final String theUrl, final String theDateTime) {
         setEmail(theEmail);
         setUrl(theUrl);
         setDateTime(theDateTime);
     }
 
-    protected Contato() {
+    protected Contact() {
     }
 
     public final String getEmail() {
@@ -54,3 +54,4 @@ public class Contato extends AbstractEntity {
         datetime = theDateTime;
     }
 }
+
