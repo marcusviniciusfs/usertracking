@@ -1,7 +1,11 @@
+    REPOSITORY
+
+    - https://github.com/marcusviniciusfs/usertracking.git;
+
     BUILD
 
-    Execute mvn install para inicia-lo
-    O zip de distribuição será gerado em target/pacsng-<VERSÃO>-bin.zip
+    - Execute mvn install to start it;
+    - O zip de distribuição será gerado em target/pacsng-<VERSÃO>-bin.zip
 
     INSTALLATION REQUIREMENTS
     Linux ou Windows

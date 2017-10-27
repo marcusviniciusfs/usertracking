@@ -7,7 +7,10 @@
     <groupId>com.resultadosdigitais</groupId>
     <artifactId>usertracking</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+
+    <scm>
+        <connection>scm:git:https://github.com/marcusviniciusfs/usertracking.git</connection>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -202,6 +205,56 @@
             </plugin>
 
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.rd.main.Main</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version} ${buildNumber}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>1.2.1</version>
@@ -209,7 +262,6 @@
 
         </plugins>
 
-        <finalName>usertracking</finalName>
     </build>
 
 </project>

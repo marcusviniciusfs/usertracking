@@ -6,7 +6,7 @@ create table serverconfiguration (
     serverdescription   varchar(255)
 );
 
-create table contato (
+create table contact (
     id            integer primary key,
 
     email         varchar(56) not null unique,
