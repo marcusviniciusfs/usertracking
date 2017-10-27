@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
                 query = "from Contato"
         )
 })
-public class Contato {
+public class Contato extends AbstractEntity {
 
     public static final String FIND_ALL = "Contato.findAll";
 

@@ -16,7 +16,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
+import javax.servlet.ServletContext;
+import java.io.InputStream;
 
 enum CommandLineOption {
 
@@ -93,7 +94,8 @@ public final class Main {
     private static void start() {
         final DatabaseService databaseService;
         try {
-            databaseService = new DatabaseService(UserTracking.class.getSimpleName(), new File("hibernate.properties"));
+            InputStream inputStream = (ServletContext.class.getResourceAsStream("WEB-INF/hibernate.properties"));
+            databaseService = new DatabaseService(UserTracking.class.getSimpleName(), inputStream);
         } catch (DatabaseException e) {
             LOGGER.trace("", e);
             LOGGER.error("", ExceptionUtils.getRootCause(e));

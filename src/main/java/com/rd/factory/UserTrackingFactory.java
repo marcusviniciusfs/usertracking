@@ -27,8 +27,8 @@ class UserTrackingImpl implements UserTracking {
 
     UserTrackingImpl(final DatabaseService theDatabaseService) {
         LOGGER.info("Version: {}", getVersion());
-
         databaseService = theDatabaseService;
+        //new UserTrackingApplication(this);
     }
 
     @Override
