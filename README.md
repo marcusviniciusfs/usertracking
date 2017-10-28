@@ -1,47 +1,46 @@
-    REPOSITORY
+    1. REPOSITORY
 
-    - https://github.com/marcusviniciusfs/usertracking.git;
+        - https://github.com/marcusviniciusfs/usertracking.git;
 
-    BUILD
+    2. BUILD
 
-    - Execute mvn install to start it;
-    - O zip de distribuição será gerado em target/pacsng-<VERSÃO>-bin.zip
+        - Execute mvn install to build it;
+        - The distribution zip will be provided in target/usertracking-<VERSION>-bin.zip directory;
 
-    INSTALLATION REQUIREMENTS
-    Linux ou Windows
+    3. INSTALLATION REQUIREMENTS
 
-    Java 1.7 ou superior (Oracle ou OpenJDK)
+        - Linux or Windows;
+        - Java 1.7 or superior (Oracle ou OpenJDK);
+        - Postgre Database;
 
-    Um dos seguintes BDs:
+    4. INSTALLATION
 
-    Microsoft SQL Server
-    Oracle
-    Postgre
-    Apenas para Windows: Visual C++ Redistributable Packages for Visual Studio 2013
-    (instale a versão x64 se for utilizar Java 64 bits, ou a versão x86 se for utilizar Java 32 bits)
+        - There are two options to create the database: manually following the steps 'a', 'b', 'c', 'd' and 'e' or automatically;
 
-    INSTALLATION
-    Descompacte o zip de distribuição em um diretório a escolha do usuário
+        - If you prefer the second option, go to 'e' step configuring the database properties and than execute the command
+          java -jar usertracking-<VERSION>.jar with the parameter -m at the prompt command and the application will uses the
+          liquibase plugin to create a database with default configuration. Ex: <java -jar usertracking-<VERSION>.jar -m>
 
-    Crie um database no BD escolhido
+        a. Unzip the distribution zip into a directory the user's choice;
 
-    Execute o script de criação do schema de BD disponível em sql/create.sql
+        b. Create a database at chosen BD;
 
-    Execute o script específico para o BD escolhido no diretório sql (sql/postgre.sql, por exemplo)
+        c. Execute the creation script of the BD schema available at directory <sql/create.sql>;
 
-    Renomeie o arquivo hibernate-sample.properties localizado na raiz da instalação para hibernate.properties e configure as seguintes opções:
+        d. Execute the specific script available at directory <sql/postgre.sql>;
 
-    URL de conexão
-    Usuário e senha
-    Driver JDBC
-    Apenas para o Postgre, é necessário configurar um dialeto personalizado: hibernate.dialect=com.pixeon.util.CustomPostgreSQLDialect
-    Exemplo para o Postgre:
+        e. Configure the following options: Connection URL, Driver JDBC, User and Password. Sample:
 
-    hibernate.connection.url=jdbc:postgresql://127.0.0.1/pacsng
-    hibernate.connection.username=postgres
-    hibernate.connection.password=postgres
-    hibernate.connection.driver_class=org.postgresql.Driver
-    hibernate.dialect=com.pixeon.util.CustomPostgreSQLDialect
-    hibernate.default_batch_fetch_size=100
-    hibernate.hbm2ddl.auto=validate
-    hibernate.connection.provider_class=org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+            - hibernate.connection.url=jdbc:postgresql://127.0.0.1/usertracking
+            - hibernate.connection.username=postgres
+            - hibernate.connection.password=postgres
+            - hibernate.connection.driver_class=org.postgresql.Driver
+
+    5. INITIALIZATION
+
+        - Execute in the root installation directory: <java -jar usertracking-<VERSION>.jar start>
+
+    6. TEST
+
+        - Once the application is up, you can edit the 'test_usertracking' shell script with the end point
+          http://${DEFAULT_HOSTNAME}:${DEFAULT_PORT}/service/conta ct to insert a test contact;

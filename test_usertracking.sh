@@ -6,7 +6,7 @@ export DEFAULT_PORT=8080
 echo --------
 curl -i -X POST http://${DEFAULT_HOSTNAME}:${DEFAULT_PORT}/service/contact -H "Content-Type: application/json" -d '
 {
-    "email": "marcus.duty@gmail.com",
+    "email": "teste@resultadosdigitais.com",
     "url": "www.resultadosdigitais.com.br",
     "datetime": "20172710 101010"
 }
